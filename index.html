@@ -1,15 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Azertype</title>
-  <link rel="icon" href="assets/cb-favicon.ico" />
-  <script src="scripts/config.js"></script>
-  <script src="scripts/script.js"></script>
-  <script src="scripts/main.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azertype</title>
 
-</body>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" href="assets/cb-favicon.ico" />
+
+    <script src="scripts/config.js" defer></script>
+    <script src="scripts/popup.js" defer></script>
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <h1>AzerType</h1>
+      <h2>THE App to type faster!</h2>
+      <h3>AzerType (from OpenClassrooms) is a web app to help you type faster on your French keyboard :)</h3>
+  </header>
+
+  <!-- MAIN -->
+    <main>
+        <div class="optionsArea">
+            <p>Choose your option and type in the word or phrase displayed in the field below.</p>
+            <div class="optionSource">
+                <input type="radio" name="optionSource" id="words" value="1" checked>
+                <label for="words">Words</label>
+                <input type="radio" name="optionSource" id="phrases" value="2">
+                <label for="phrases">Phrases</label>
+            </div>
+        </div>
+
+        <div class="propositionArea">
+            Towel
+        </div>
+
+        <div class="inputArea">
+            <input type="text" id="typeInput" name="typeInput">
+            <button id="btnSubmitWord">Submit</button>
+        </div>
+
+        <div class="scoreArea">
+            Your score : <span>0</span>
+        </div>
+
+        <div class="shareArea">
+            <button>Share</button>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      @Copyright : Openclassrooms.
+    </footer>
+
+    <!-- Popup de partage -->
+    <div class="popupBackground">
+      <div class="popup">
+          <div>Share your score</div>
+          <form novalidate>
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="Your name">
+              <label for="email">Who do you want to share your score with ?</label>
+              <input type="email" id="email" name="email" placeholder="name@service.com">
+              <button id="btnSendMail">Send</button>
+          </form>
+      </div>
+    </div>
+  </body>
 </html>
