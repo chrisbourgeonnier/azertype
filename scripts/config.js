@@ -8,13 +8,3 @@ let share = document.getElementById("btnShare");
 share.addEventListener("click", () => {
   console.log("share");
 })
-
-let scoreArea = document.querySelector(".scoreArea span");
-
-
-let radioOptionSource = document.querySelectorAll(".optionSource input");
-console.log(radioOptionSource);
-
-for (let i = 0; i < radioOptionSource.length; i++) {
-  console.log(radioOptionSource[i]);
-}

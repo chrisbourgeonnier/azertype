@@ -5,34 +5,48 @@ function displayScore(score, numberOfQuestions) {
   scoreArea.innerHTML = `${score} / ${numberOfQuestions}`;
 }
 
+function displayProposition(proposition) {
+  let propositionArea = document.querySelector(".propositionArea");
+  propositionArea.innerText = proposition;
+}
+
 function launchGame() {
   let score = 0;
   let i = 0;
+  let list = words
 
   let submitWord = document.getElementById("btnSubmitWord");
   let userInput = document.getElementById("typeInput");
 
-  displayProposition(words[i])
+  displayProposition(list[i])
 
   submitWord.addEventListener("click", () => {
-    console.log(userInput.value);
-    if (userInput.value === words[i]) {
+    if (userInput.value === list[i]) {
       score++
     }
     i++;
     displayScore(score, i)
     userInput.value = "";
-    if (words[i] === undefined) {
+    if (list[i] === undefined) {
       displayProposition("game over");
       submitWord.disabled = true;
     } else {
-      displayProposition(words[i]);
+      displayProposition(list[i]);
     }
   })
+
+  let radioOptionSource = document.querySelectorAll(".optionSource input");
+  for (let index = 0; index < radioOptionSource.length; index ++) {
+    radioOptionSource[index].addEventListener("change", (event) => {
+      if (event.target.value === "1") {
+        list = words;
+      } else {
+        list = phrases;
+      }
+      displayProposition(list[i]);
+    })
+
   displayScore(score, i)
 }
 
-function displayProposition(proposition) {
-  let propositionArea = document.querySelector(".propositionArea");
-  propositionArea.innerText = proposition;
 }
