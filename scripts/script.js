@@ -1,41 +1,38 @@
 
 function displayScore(score, numberOfQuestions) {
   // Displays the end score
-  console.log(`Your score is ${score} out of ${numberOfQuestions}`);
-}
-
-function chooseWordOrPhrase() {
-  // while the user doesn't type one of the choices, the prompt will loop
-  let choice = prompt("Play with 'words' or 'phrases' (enter the word)")
-  while (choice !== 'words' && choice !== 'phrases') {
-    choice = prompt("Play with 'words' or 'phrases'")
-  };
-  return choice;
-}
-
-function gameLoop(list) {
-  let score = 0;
-  for (let i = 0; i < list.length; i++) {
-    let userInput = prompt(`Type the following: ${list[i]}`);
-    if (userInput === list[i]) {
-      score++;
-    }
-  }
-  return score;
+  let scoreArea = document.querySelector(".scoreArea span");
+  scoreArea.innerHTML = `${score} / ${numberOfQuestions}`;
 }
 
 function launchGame() {
-  let choice = chooseWordOrPhrase()
   let score = 0;
-  let numberOfQuestions = 0;
+  let i = 0;
 
-  if (choice === 'words') {
-    score = gameLoop(words);
-    numberOfQuestions = words.length
-  } else {
-    score = gameLoop(phrases);
-    numberOfQuestions = phrases.length
-  }
+  let submitWord = document.getElementById("btnSubmitWord");
+  let userInput = document.getElementById("typeInput");
 
-  displayScore(score, numberOfQuestions)
+  displayProposition(words[i])
+
+  submitWord.addEventListener("click", () => {
+    console.log(userInput.value);
+    if (userInput.value === words[i]) {
+      score++
+    }
+    i++;
+    displayScore(score, i)
+    userInput.value = "";
+    if (words[i] === undefined) {
+      displayProposition("game over");
+      submitWord.disabled = true;
+    } else {
+      displayProposition(words[i]);
+    }
+  })
+  displayScore(score, i)
+}
+
+function displayProposition(proposition) {
+  let propositionArea = document.querySelector(".propositionArea");
+  propositionArea.innerText = proposition;
 }
