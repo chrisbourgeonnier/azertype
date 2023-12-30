@@ -1,10 +1,3 @@
-/*********************************************************************************
- *
- * Ce fichier contient toutes les fonctions nécessaires à l'affichage et à la
- * fermeture de la popup de partage.
- *
- *********************************************************************************/
-
 
 /**
  * Cette fonction affiche la popup pour partager son score.
