@@ -10,10 +10,16 @@ function displayProposition(proposition) {
   propositionArea.innerText = proposition;
 }
 
+function displayEmail(name, email, score) {
+  let mailto = `mailto:${email}?subject=Score sharing Azertype&body=Hi, this is ${name} and I got ${score} on Azertype !`
+  location.href = mailto
+}
+
 function launchGame() {
   let score = 0;
   let i = 0;
   let list = words
+  initAddEventListenerPopup()
 
   let submitWord = document.getElementById("btnSubmitWord");
   let userInput = document.getElementById("typeInput");
@@ -45,6 +51,21 @@ function launchGame() {
       }
       displayProposition(list[i]);
     })
+
+  let form = document.querySelector("form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let nameInfo = document.getElementById("name");
+    let name = nameInfo.value;
+
+    let emailInfo = document.getElementById("email");
+    let email = emailInfo.value;
+
+    let scoreEmail = `${score} / ${i}`
+
+    displayEmail(name, email, scoreEmail);
+  })
 
   displayScore(score, i)
 }

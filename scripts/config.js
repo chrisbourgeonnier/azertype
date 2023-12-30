@@ -4,7 +4,7 @@ const phrases = ["Don't Panic!", "Life, the Universe and Everything", "So long, 
 
 // Elements selected
 
-let share = document.getElementById("btnShare");
-share.addEventListener("click", () => {
-  console.log("share");
-})
+// let share = document.getElementById("btnShare");
+// share.addEventListener("click", () => {
+//   console.log("share");
+// })
