@@ -15,6 +15,21 @@ function displayEmail(name, email, score) {
   location.href = mailto
 }
 
+function validateName(name) {
+  if (name.length >= 2) {
+    return true;
+  }
+  return false;
+}
+
+function validateEmail(email) {
+  let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
+  if (emailRegExp.test(email)) {
+    return true;
+  }
+  return false;
+}
+
 function launchGame() {
   let score = 0;
   let i = 0;
@@ -62,9 +77,13 @@ function launchGame() {
     let emailInfo = document.getElementById("email");
     let email = emailInfo.value;
 
-    let scoreEmail = `${score} / ${i}`
+    if (validateName(name) && validateEmail(email)) {
+      let scoreEmail = `${score} / ${i}`
+      displayEmail(name, email, scoreEmail);
+    } else {
+      console.log("error");
+    };
 
-    displayEmail(name, email, scoreEmail);
   })
 
   displayScore(score, i)
