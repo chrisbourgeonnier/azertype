@@ -16,18 +16,47 @@ function displayEmail(name, email, score) {
 }
 
 function validateName(name) {
-  if (name.length >= 2) {
-    return true;
+  if (name.length < 2) {
+    throw new Error("The name is too short.");
   }
-  return false;
 }
 
 function validateEmail(email) {
   let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
-  if (emailRegExp.test(email)) {
-    return true;
+  if (!emailRegExp.test(email)) {
+    throw new Error("Email is not valid.");
   }
-  return false;
+}
+
+function displayErrorMessage(message) {
+
+  let spanErrorMessage = document.getElementById("errorMessage");
+
+  if (!spanErrorMessage) {
+    let popup = document.querySelector(".popup");
+    spanErrorMessage = document.createElement("span");
+    spanErrorMessage.id = "errorMessage"
+
+    popup.append(spanErrorMessage);
+  }
+  spanErrorMessage.innerText = message;
+}
+
+function manageForm(scoreEmail) {
+  try {
+    let nameInfo = document.getElementById("name");
+    let name = nameInfo.value;
+    validateName(name);
+
+    let emailInfo = document.getElementById("email");
+    let email = emailInfo.value;
+    validateEmail(email);
+    displayErrorMessage("");
+    displayEmail(name, email, scoreEmail);
+
+  } catch(error) {
+    displayErrorMessage(error.message);
+  }
 }
 
 function launchGame() {
@@ -67,24 +96,14 @@ function launchGame() {
       displayProposition(list[i]);
     })
 
-  let form = document.querySelector("form");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    let nameInfo = document.getElementById("name");
-    let name = nameInfo.value;
-
-    let emailInfo = document.getElementById("email");
-    let email = emailInfo.value;
-
-    if (validateName(name) && validateEmail(email)) {
+    let form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
       let scoreEmail = `${score} / ${i}`
-      displayEmail(name, email, scoreEmail);
-    } else {
-      console.log("error");
-    };
 
-  })
+      manageForm(scoreEmail)
+    })
+
 
   displayScore(score, i)
 }
